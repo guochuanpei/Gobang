@@ -25,7 +25,7 @@ import java.util.List;
 public class CustomView extends View implements MainActivity.Repaint {
     private int mPanelWidth;
     private float mLineHeight;
-    private int MAX_LINE = 15;
+    private int MAX_LINE = 10;
     private Paint mPaint = new Paint();
     private Bitmap mWhitePiece;
     private Bitmap mBlockPiece;
@@ -107,6 +107,12 @@ public class CustomView extends View implements MainActivity.Repaint {
             String text = mIsWhiteWinner ? "白棋胜利" : "黑棋胜利";
             Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show();
         }
+        if (mWhiteArray.size() + mBlockArray.size() == MAX_LINE * MAX_LINE) {
+            mIsGameOver = true;
+            mIsWhiteWinner = whiteWin;
+            Toast.makeText(getContext(), "平局", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     private Boolean checkFiveInLine(List<Point> whiteArray) {
